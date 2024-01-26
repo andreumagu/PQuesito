@@ -43,7 +43,7 @@ export class LoginComponent {
         console.log(response);
       },
       error => {
-        console.log("pepe");
+        console.log("No se han obtenido los datos");
       }
     );
 
