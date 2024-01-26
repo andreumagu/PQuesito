@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {LoginService} from "../../services/login.service";
 import {FormsModule} from "@angular/forms";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    NgOptimizedImage
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
