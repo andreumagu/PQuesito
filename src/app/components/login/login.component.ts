@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {Usuario} from "../../models/usuario";
 import {LoginService} from "../../services/login.service";
 import {FormsModule} from "@angular/forms";
 
@@ -14,8 +13,6 @@ import {FormsModule} from "@angular/forms";
 })
 export class LoginComponent {
 
-  // @ts-ignore
-  posts = new Usuario('', '');
 
   /* Creamos una instancia (objeto) de la clase Service */
   constructor(private service:LoginService) {}
@@ -23,12 +20,30 @@ export class LoginComponent {
   emailUsuario: string = "";
   contra: string = "";
 
-  onClick(){
-   const jsonData: string = JSON.stringify({
-     email: this.emailUsuario,
-     password: this.contra
-   })
-     console.log(jsonData);
+  onIniciarClick() {
+    const jsonData = JSON.stringify({
+      email: this.emailUsuario,
+      password: this.contra
+    })
+    //
+    // const jsonData = {
+    //     email: this.email,
+    //     password: this.passwd
+    // };
+    console.log(jsonData);
+
+    this.service.getToken(jsonData).subscribe(
+      // next: (response) => {
+      //   console.log(response);
+      //   // Maneja la respuesta aquí
+      // },
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log("pepe");
+      }
+    );
 
   }
 

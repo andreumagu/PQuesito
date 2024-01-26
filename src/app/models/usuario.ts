@@ -1,11 +1,15 @@
 export class Usuario {
-  email: string;
-  password: string;
+  dni: string;
+  nombre: string;
+  apellido1: string;
+  apellido2: string;
+  curso: string;
 
-  constructor(email: string, password: string){
-    this.email = email;
-    this.password = password;
-
+  constructor(dni: string, nombre: string, apellido1: string, apellido2: string, curso: string) {
+    this.dni= dni;
+    this.nombre= nombre;
+    this.apellido1= apellido1;
+    this.apellido2= apellido2;
+    this.curso = curso;
   }
-
 }

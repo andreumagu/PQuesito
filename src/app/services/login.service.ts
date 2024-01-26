@@ -14,7 +14,7 @@ export class LoginService {
    */
   constructor(private httpClient: HttpClient) { }
 
-  // Función para invocar la url (servidor) en sí
+  // Función para invocar el WS (servidor)
   getToken(jsonData: string) : Observable<any> {
    return this.httpClient.post(this.url, {json: jsonData});
   }
