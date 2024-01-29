@@ -13,8 +13,8 @@ import {NgOptimizedImage} from "@angular/common";
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
 
+export class LoginComponent {
 
   /* Creamos una instancia (objeto) de la clase Service */
   constructor(private service:LoginService) {}
