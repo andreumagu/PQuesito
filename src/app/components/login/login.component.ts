@@ -19,31 +19,16 @@ export class LoginComponent {
   /* Creamos una instancia (objeto) de la clase Service */
   constructor(private service:LoginService) {}
 
-  emailUsuario: string = "";
-  contra: string = "";
+  email: string = "";
+  password: string = "";
 
   onIniciarClick() {
-    const jsonData = JSON.stringify({
-      email: this.emailUsuario,
-      password: this.contra
-    })
-    //
-    // const jsonData = {
-    //     email: this.email,
-    //     password: this.passwd
-    // };
-    console.log(jsonData);
-
-    this.service.getToken(jsonData).subscribe(
-      // next: (response) => {
-      //   console.log(response);
-      //   // Maneja la respuesta aquí
-      // },
+    this.service.getToken(this.email, this.password).subscribe(
       response => {
         console.log(response);
       },
       error => {
-        console.log("No se han obtenido los datos");
+        console.log(error);
       }
     );
 

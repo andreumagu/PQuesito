@@ -9,8 +9,8 @@
     <div class="form-container iniciar-sesion">
       <form action="#" method="post">
         <h2>Iniciar Sesión</h2>
-        <input type="text" name="usuario" placeholder="Usuario" id="usuario" [(ngModel)]="emailUsuario">
-        <input type="password" name="password" placeholder="Contraseña" id="password" [(ngModel)]="contra">
+        <input type="text" name="usuario" placeholder="Usuario" [(ngModel)]="email">
+        <input type="password" name="password" placeholder="Contraseña" [(ngModel)]="password">
         <a href="#">Has olvidado tu Contraseña?</a>
         <input type="submit" value="Iniciar Sesión" (click)="onIniciarClick()">
       </form>
