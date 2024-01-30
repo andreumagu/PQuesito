@@ -26,7 +26,10 @@ export class LoginComponent {
   onIniciarClick() {
     this.service.getToken(this.email, this.password).subscribe(
       response => {
-        console.log(response);
+
+        // Almacenamos el token en una variable local
+        localStorage.setItem('token', response.token);
+
         //Redireccionamos a la página de home
         this.router.navigate(['/home']);
       },
