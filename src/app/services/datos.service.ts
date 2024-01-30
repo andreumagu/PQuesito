@@ -7,14 +7,16 @@ import {Usuario} from "../models/usuario";
   providedIn: 'root'
 })
 export class DatosService {
-  private url = 'http://10.116.0.219:8080/wsprueba/wsprueba.php';
+  private url = 'http://10.116.0.219:8080/WS/wsprueba/wsprueba.php';
 
 
   constructor(private httpClient: HttpClient) { }
 
-  getDatos(email: string | null):Observable<Usuario>{
-
-    return this.httpClient.get<Usuario>(this.url + '?email=' + email);
+  getDatos(correo: string):Observable<any>{
+    const body = {
+      email: correo
+    }
+    return this.httpClient.post(this.url, body);
 
   }
 
