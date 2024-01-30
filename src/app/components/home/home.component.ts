@@ -21,8 +21,7 @@ import {Router} from "@angular/router";
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
-    FrasesMotivadorasComponent,
-    Router
+    FrasesMotivadorasComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
