@@ -8,6 +8,9 @@ import {DatosService} from "../../services/datos.service";
 import {ComprobartokenService} from "../../services/comprobartoken.service";
 import { jwtDecode } from "jwt-decode";
 import {DecodedToken} from "../../interfaces/decoded-token";
+import {FrasesMotivadorasComponent} from "../frases-motivadoras/frases-motivadoras.component";
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-home',
@@ -17,7 +20,8 @@ import {DecodedToken} from "../../interfaces/decoded-token";
     ReactiveFormsModule,
     MatButtonModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    FrasesMotivadorasComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -27,9 +31,7 @@ export class HomeComponent {
 
   usuario = new Usuario("", "", "", "", "", "");
 
-
   constructor(private service: DatosService, private comprobar: ComprobartokenService) {
-  }
 
   ngOnInit() {
 
@@ -52,5 +54,9 @@ export class HomeComponent {
       this.usuario.email = data.Email;
 
     }
+  }
+
+  onClick(){
+    this.router.navigate(['/modulos']);
   }
 }
