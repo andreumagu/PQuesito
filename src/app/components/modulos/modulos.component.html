@@ -6,10 +6,98 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Tus asignaturas</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.2/chart.umd.js">
+  </script>
 </head>
 
-<body style="background-image: url('assets/elipses.png');">
+<body>
 
+<mat-drawer-container class="example-container" autosize>
+ <!-- Icono desplegable -->
+  <div class="example-sidenav-content">
+    <button mat-icon-button aria-label="Example icon button with a menu icon" (click)="drawer.toggle()">
+        <span class="material-symbols-rounded">menu</span>
+    </button>
+  </div>
+
+  <!-- Configuracion del desplegable -->
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <img src="assets/logo-cesur-2023-b&y.png" style="width: 254px; height: 70.5px; margin-bottom: 15px">
+    <section>
+      <button style="padding-right: 120px" mat-button>
+        <span class="material-symbols-rounded">home <mat-label>Menú</mat-label></span>
+      </button>
+    </section>
+    <section>
+      <button style="padding-right: 100px" mat-button>
+        <span class="material-symbols-rounded">person <mat-label>Usuario</mat-label></span>
+      </button>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+    <button style="padding-right: 120px" mat-button>
+      <span class="material-symbols-rounded">help <mat-label>Ayuda</mat-label></span>
+    </button>
+  </section>
+    <button class="bLogOut" mat-button>
+      <span class="material-symbols-rounded">logout <mat-label>Cerrar sesión</mat-label></span>
+    </button>
+  </mat-drawer>
+
+  <!-- Contenedores con las notas -->
+  <div class="nombreModulos">
+      <p>Desarrollo de Aplicaciones Web</p>
+  </div>
+  <div class="tablaModulos">
+      <p>tabla</p>
+  </div>
+  <div class="graficoModulos">
+    <div class="sobreTexto">
+      <p>nombre</p>
+    </div>
+      <p>gráfico</p>
+      <div>
+        <canvas id="polarAreaChart" width="700" height="300"></canvas>
+      </div>
+      <script>
+      const data = {
+        labels: ['RA1', 'RA2', 'RA3', 'RA4', 'RA5'],
+        datasets: [{
+          label: 'Desarrollo de Aplicaciones Web',
+          data: [10, 2, 6, 9, 5],
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(75, 192, 192)',
+            'rgb(255, 205, 86)',
+            'rgb(201, 203, 207)',
+            'rgb(54, 162, 235)'
+          ],
+          borderColor: 'black',
+          borderWidth: 0.5,
+        }]
+      };
+      const config = {
+        type: 'polarArea',
+        data: data,
+        options: {
+          scales: {
+            r: {
+              grid: {
+                color: 'grey',
+              }
+            }
+          }
+        }
+      };
+      let ctx = document.getElementById('polarAreaChart')
+        .getContext('2d');
+      let myPolarAreaChart = new Chart(ctx, config);
+    </script>
+  </div>
+
+</mat-drawer-container>
 </body>
 </html>
