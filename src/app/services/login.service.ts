@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class LoginService {
   //private url = 'http://localhost:8080/signin.php';
-  //private url = 'http://10.116.0.219:8080/jwt/tokens-api/signin.php';
+  //private url = 'http://10.116.0.219:8080/WS/jwt/tokens-api/signin.php';
   private url = 'https://m4.xaviersastre.cat/apitest/jwt/tokens-api/signin.php';
 
   /* Creamos una instancia (objeto) de la clase HTTPCLIENT para poder obtener la información los parámetros
