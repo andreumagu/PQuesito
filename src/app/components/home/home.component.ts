@@ -21,42 +21,44 @@ import {Router} from "@angular/router";
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
-    FrasesMotivadorasComponent
+    FrasesMotivadorasComponent,
+    Router
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  title: string ='home';
+  title: string = 'home';
 
   usuario = new Usuario("", "", "", "", "", "");
 
-  constructor(private service: DatosService, private comprobar: ComprobartokenService) {
+  constructor(private service: DatosService, private comprobar: ComprobartokenService, private router: Router) {}
 
-  ngOnInit() {
+    ngOnInit(){
 
-    // Recuperar el el token
-    const token = localStorage.getItem('token');
+      // Recuperar el el token
+      const token = localStorage.getItem('token');
 
-    if (token && this.comprobar.comprobar(token)){
-      const decodedToken: DecodedToken = jwtDecode(token);
-      console.log(decodedToken);
+      if (token && this.comprobar.comprobar(token)) {
+        const decodedToken: DecodedToken = jwtDecode(token);
+        console.log(decodedToken);
 
-      // Acceder a la información de data
-      const data = decodedToken.data;
-      console.log('Información de data:', data);
+        // Acceder a la información de data
+        const data = decodedToken.data;
+        console.log('Información de data:', data);
 
-      // Asignar propiedades del usuario
-      this.usuario.dni = data.dni;
-      this.usuario.nombre = data.nombre;
-      this.usuario.apellido1 = data.apellido1;
-      this.usuario.apellido2 = data.apellido2;
-      this.usuario.email = data.Email;
+        // Asignar propiedades del usuario
+        this.usuario.dni = data.dni;
+        this.usuario.nombre = data.nombre;
+        this.usuario.apellido1 = data.apellido1;
+        this.usuario.apellido2 = data.apellido2;
+        this.usuario.email = data.Email;
 
+      }
     }
-  }
 
-  onClick(){
+  onClick (){
     this.router.navigate(['/modulos']);
   }
 }
+
