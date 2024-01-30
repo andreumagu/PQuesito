@@ -20,6 +20,8 @@ import {DatosService} from "../../services/datos.service";
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  title: string ='home';
+
   usuario = new Usuario("", "", "", "", "");
 
   email = 'eva.e@example.com';
