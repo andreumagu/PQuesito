@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {LoginService} from "../../services/login.service";
 import {FormsModule} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
+import { Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ import {NgOptimizedImage} from "@angular/common";
 export class LoginComponent {
 
   /* Creamos una instancia (objeto) de la clase Service */
-  constructor(private service:LoginService) {}
+  constructor(private service:LoginService, private router: Router) {}
 
   email: string = "";
   password: string = "";
@@ -25,7 +26,12 @@ export class LoginComponent {
   onIniciarClick() {
     this.service.getToken(this.email, this.password).subscribe(
       response => {
-        console.log(response);
+
+        // Almacenamos el token en una variable local
+        localStorage.setItem('token', response.token);
+
+        //Redireccionamos a la página de home
+        this.router.navigate(['/home']);
       },
       error => {
         console.log(error);

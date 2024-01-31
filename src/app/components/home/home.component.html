@@ -11,17 +11,18 @@
 
       <div class="infoAlu">
       <!-- Nombre alumno -->
-      <p>Bienvenido, {{ usuario.nombre }}!<!-- Variable de los alumnos --> </p>
+      <p>Bienvenido/a, {{ usuario.nombre }}!<!-- Variable de los alumnos --> </p>
 
       <!-- Botón ver notas -->
-      <a mat-raised-button href="#">ver mis notas</a>
+      <a mat-raised-button href="#" (click)="onClick()">ver mis notas</a>
       </div>
 
       <div class="frameFrasesMot">
       <!-- Frases motivadoras -->
         <!-- Cambiar el texto por una variable que muestre mensajes motivadores de forma aleatoria -->
-        <p>Vamos que tu puedes! #YPOYAQUE</p>
+        <p><app-frases-motivadoras></app-frases-motivadoras></p>
       </div>
 
   </div>
 </body>
+
