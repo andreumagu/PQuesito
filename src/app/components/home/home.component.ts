@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
@@ -10,6 +10,8 @@ import { jwtDecode } from "jwt-decode";
 import {DecodedToken} from "../../interfaces/decoded-token";
 import {FrasesMotivadorasComponent} from "../frases-motivadoras/frases-motivadoras.component";
 import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {FrasesService} from "../../services/frases.service";
 
 
 @Component({
@@ -26,14 +28,18 @@ import {Router} from "@angular/router";
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   title: string = 'home';
 
   usuario = new Usuario("", "", "", "", "", "");
 
-  constructor(private service: DatosService, private comprobar: ComprobartokenService, private router: Router) {}
+  fraseAleatoria: string = '';
 
-    ngOnInit(){
+  constructor(private service: DatosService, private comprobar: ComprobartokenService, private router: Router, private frasesService: FrasesService) {}
+
+  ngOnInit(){
+
+      this.obtenerFraseAleatoria();
 
       // Recuperar el el token
       const token = localStorage.getItem('token');
@@ -59,5 +65,21 @@ export class HomeComponent {
   onClick (){
     this.router.navigate(['/modulos']);
   }
+
+  obtenerFraseAleatoria() {
+        this.frasesService.obtenerFraseAleatoria().subscribe(
+            data => {
+                if (data.frase) {
+                    this.fraseAleatoria = data.frase;
+                } else {
+                    console.error('Error al obtener la frase aleatoria.');
+                }
+            },
+            error => {
+                console.error('Error en la solicitud HTTP:', error);
+            }
+        );
+    }
+
 }
 
