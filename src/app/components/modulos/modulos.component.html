@@ -27,7 +27,7 @@
     <img src="assets/logo-cesur-2023-b&y.png" style="width: 254px; height: 70.5px; margin-bottom: 15px">
     <section>
       <button style="padding-right: 120px" mat-button>
-        <span class="material-symbols-rounded">home <mat-label>Menú</mat-label></span>
+        <span class="material-symbols-rounded" (click)="onClickHome()">home <mat-label>Menú</mat-label></span>
       </button>
     </section>
     <section>
@@ -42,7 +42,7 @@
     </button>
   </section>
     <button class="bLogOut" mat-button>
-      <span class="material-symbols-rounded">logout <mat-label>Cerrar sesión</mat-label></span>
+      <span class="material-symbols-rounded" (click)="cerrarSesion()">logout <mat-label>Cerrar sesión</mat-label></span>
     </button>
   </mat-drawer>
 

@@ -8,7 +8,6 @@ import {DatosService} from "../../services/datos.service";
 import {ComprobartokenService} from "../../services/comprobartoken.service";
 import { jwtDecode } from "jwt-decode";
 import {DecodedToken} from "../../interfaces/decoded-token";
-import {FrasesMotivadorasComponent} from "../frases-motivadoras/frases-motivadoras.component";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {FrasesService} from "../../services/frases.service";
@@ -23,7 +22,6 @@ import {FrasesService} from "../../services/frases.service";
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
-    FrasesMotivadorasComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

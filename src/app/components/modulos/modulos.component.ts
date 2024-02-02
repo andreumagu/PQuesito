@@ -5,6 +5,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import {LoginService} from "../../services/login.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -16,4 +18,15 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class ModulosComponent {
   showFiller = false;
+
+  constructor(private router: Router) {}
+  onClickHome (){
+    this.router.navigate(['/home']);
+  }
+
+  cerrarSesion(){
+    this.router.navigate(['/login']);
+    //Eliminamos el token una vez hecho logout
+    localStorage.removeItem('token');
+  }
 }
