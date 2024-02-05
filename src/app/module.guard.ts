@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
-//Este archivo compruba si existe un token o no para evitar que un usuario pueda acceder a las diferentes páginas sin logearse
+//Este archivo comprueba si existe un token o no para evitar que un usuario pueda acceder a las diferentes páginas sin logearse
 @Injectable({
   providedIn: 'root'
 })
