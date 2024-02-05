@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ComprobartokenService {
-  private url = 'http://10.116.0.219:8080/WS/jwt/tokens-api/comprobartoken.php';
+  private url = 'https://m4.xaviersastre.cat/apitest/jwt/tokens-api/comprobartoken.php';
   constructor(private httpClient: HttpClient) { }
 
   comprobar(token: string) : Observable<any> {

@@ -29,7 +29,7 @@ import {FrasesService} from "../../services/frases.service";
 export class HomeComponent implements OnInit{
   title: string = 'home';
 
-  usuario = new Usuario("", "", "", "", "", "");
+  usuario = new Usuario("", "", "", "", "", "", "");
 
   fraseAleatoria: string = '';
 
@@ -42,13 +42,11 @@ export class HomeComponent implements OnInit{
       // Recuperar el el token
       const token = localStorage.getItem('token');
 
-      if (token && this.comprobar.comprobar(token)) {
+      if (token) {
         const decodedToken: DecodedToken = jwtDecode(token);
-        console.log(decodedToken);
 
         // Acceder a la información de data
         const data = decodedToken.data;
-        console.log('Información de data:', data);
 
         // Asignar propiedades del usuario
         this.usuario.dni = data.dni;
@@ -57,6 +55,8 @@ export class HomeComponent implements OnInit{
         this.usuario.apellido2 = data.apellido2;
         this.usuario.email = data.Email;
 
+      }else {
+        this.router.navigate(['/login']);
       }
     }
 
