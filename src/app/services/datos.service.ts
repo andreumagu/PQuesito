@@ -8,15 +8,27 @@ import {Usuario} from "../models/usuario";
 })
 export class DatosService {
 
-  private url = 'http://10.116.0.219:8080/WS/jwt/tokens-api/comprobartoken.php';
+  private url = 'http://10.116.0.219:8888/WS/php-excel/readexcel.php';
 
 
   constructor(private httpClient: HttpClient) { }
 
-  
-  getDatos(email: string | null):Observable<Usuario>{
 
-    return this.httpClient.post<Usuario>(this.url, email);
+  getDatos(modul: string, ano: string, id: string):Observable<Usuario>{
+
+    const token = localStorage.getItem('token');
+
+    const header = new Headers({
+      'Authorization': `Bearer ${token}`
+    })
+
+    const body = {
+      "modul": modul,
+      "ano": ano,
+      "id": id
+    };
+
+    return this.httpClient.post<Usuario>(this.url, body);
 
   }
 
