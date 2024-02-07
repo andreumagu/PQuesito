@@ -8,12 +8,16 @@
 }
 
 body {
+  background-color: #002858;
+}
 
+.mat-drawer-content {
+  z-index: auto;
 }
 
 .example-container {
-  background-color: #002858;
-  width: 100%;
+  position: relative;
+  background: transparent;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
@@ -61,8 +65,7 @@ section {
 }
 
 .nombreModulos {
-  position: fixed;
-  top: 0;
+  position: absolute;
   background: white;
 
   width: 580px;
@@ -70,7 +73,8 @@ section {
 
   border-radius: 25px;
 
-  margin: 75px 0 0 120px;
+  top: 80px;
+  left: 100px;
 }
 
 .nombreModulos p {
@@ -79,14 +83,15 @@ section {
   justify-content: center;
   flex-direction: column;
 
-  font-weight: 600;
+  padding-top: 45px;
+
+  font-weight: 800;
+  font-size: 20px;
   letter-spacing: 1px;
-  text-transform: uppercase;
 }
 
 .tablaModulos {
-  position: fixed;
-  top: 0;
+  position: absolute;
   background: white;
 
   width: 580px;
@@ -94,7 +99,8 @@ section {
 
   border-radius: 25px;
 
-  margin: 225px 0 0 120px;
+  top: 230px;
+  left: 100px;
 }
 
 .tablaModulos p {
@@ -103,14 +109,16 @@ section {
   justify-content: center;
   flex-direction: column;
 
-  font-weight: 600;
+  padding-top: 20px;
+
+  font-weight: 800;
+  font-size: 20px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .graficoModulos {
-  position: fixed;
-  top: 0;
+  position: absolute;
   background: white;
 
   width: 1025px;
@@ -118,7 +126,13 @@ section {
 
   border-radius: 25px;
 
-  margin: 75px 0 0 750px;
+  top: 80px;
+  left: 750px;
+}
+
+#canvas {
+  position: relative;
+
 }
 
 .graficoModulos p {
@@ -127,13 +141,17 @@ section {
   justify-content: center;
   flex-direction: column;
 
-  font-weight: 600;
+  padding-top: 40px;
+
+  font-weight: 800;
+  font-size: 20px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .sobreTexto {
-  background: lightyellow;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,224,1) 30%);
 
   border-radius: 25px 25px 0 0;
   width: 100%;
