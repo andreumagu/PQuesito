@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Usuario} from "../models/usuario";
 
@@ -14,21 +14,24 @@ export class DatosService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getDatos(modul: string, ano: string, id: string):Observable<Usuario>{
+  getDatos(modul: string, ano: string, id: string):Observable<any>{
 
     const token = localStorage.getItem('token');
 
-    const header = new Headers({
+    // Configurar el header con el token de autorización
+    const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
-    })
+    });
 
+    // Definir el cuerpo de la solicitud
     const body = {
       "modul": modul,
       "ano": ano,
       "id": id
     };
 
-    return this.httpClient.post<Usuario>(this.url, body);
+    // Enviar la solicitud POST con el header y el cuerpo
+    return this.httpClient.post<any>(this.url, body, { headers: headers });
 
   }
 

@@ -22,7 +22,7 @@ export class LoginService {
       "email": correo,
       "password": contra
     };
-    // console.log(body);
+
     return this.httpClient.post(this.url, body);
   }
 
