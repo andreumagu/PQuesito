@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FrasesService {
 
-  private url = 'http://10.116.0.219:8080/WS/wsprueba/frases.php';
+  private url = 'http://10.116.0.219:8888/WS/wsprueba/frases.php';
 
   constructor(private http: HttpClient) { }
 
