@@ -12,10 +12,16 @@ import { DatosService } from "../../services/datos.service";
 import { ComprobartokenService } from "../../services/comprobartoken.service";
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
-import { Chart } from "chart.js/auto";
+import {Chart, ChartEvent, LegendElement, LegendItem} from "chart.js/auto";
 
 import {MatTableModule} from '@angular/material/table';
+import {max} from "rxjs";
 
+export interface TableElement {
+  header: string;
+  content1: string;
+  content2: string;
+}
 @Component({
   selector: 'app-modulos',
   standalone: true,
@@ -29,11 +35,15 @@ export class ModulosComponent {
   chartData: any = [];
 
   usuario = new Usuario("", "", "", "", "", "", "");
-  dataSource: any;
-  displayedColumns: any;
+
 
   constructor(private comprobar: ComprobartokenService, private router: Router) {}
-
+  displayedColumns: string[] = ['header', 'content1', 'content2'];
+  dataSource: TableElement[] = [
+    {header: 'Header 1', content1: 'Data 1.1', content2: 'Data 1.2'},
+    {header: 'Header 2', content1: 'Data 2.1', content2: 'Data 2.2'},
+    {header: 'Header 3', content1: 'Data 3.1', content2: 'Data 3.2'},
+  ];
   ngOnInit(){
     // Recuperar el el token
     const token = localStorage.getItem('token');
@@ -59,11 +69,11 @@ export class ModulosComponent {
 
     this.chartData = {
       labels: ['DWEC', 'DWES', 'DIW', 'DAW', 'EIE'],
-      datasets: [
-        {
-          data: [2,5,3,6,7],
-          borderWidth: 0.5,
-        },
+      datasets: [{
+        data: [2,5,3,6,7],
+        showLine: false,
+      },
+
       ],
     };
 
@@ -71,7 +81,21 @@ export class ModulosComponent {
       type: 'polarArea',
       data: this.chartData,
       options: {
+        scales: {
+
+        },
         aspectRatio: 1.5,
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              font: {
+                family: 'Montserrat',
+                weight: 800,
+              }
+            }
+          }
+        },
       },
     });
 
@@ -87,3 +111,4 @@ export class ModulosComponent {
     localStorage.removeItem('token');
   }
 }
+
