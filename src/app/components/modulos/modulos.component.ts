@@ -9,7 +9,6 @@ import { DecodedToken } from "../../interfaces/decoded-token";
 import { jwtDecode } from "jwt-decode";
 import { Usuario } from "../../models/usuario";
 import { DatosService } from "../../services/datos.service";
-import { ComprobartokenService } from "../../services/comprobartoken.service";
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
 import {Chart, ChartEvent, LegendElement, LegendItem} from "chart.js/auto";
@@ -20,7 +19,6 @@ import {max} from "rxjs";
 export interface TableElement {
   header: string;
   content1: string;
-  content2: string;
 }
 @Component({
   selector: 'app-modulos',
@@ -37,12 +35,14 @@ export class ModulosComponent {
   usuario = new Usuario("", "", "", "", "", "", "");
 
 
-  constructor(private comprobar: ComprobartokenService, private router: Router) {}
-  displayedColumns: string[] = ['header', 'content1', 'content2'];
+  constructor(private router: Router, private datos: DatosService) {}
+  displayedColumns: string[] = ['header', 'content1'];
   dataSource: TableElement[] = [
-    {header: 'Header 1', content1: 'Data 1.1', content2: 'Data 1.2'},
-    {header: 'Header 2', content1: 'Data 2.1', content2: 'Data 2.2'},
-    {header: 'Header 3', content1: 'Data 3.1', content2: 'Data 3.2'},
+    {header: 'DWEC', content1: 'Data 1.1'},
+    {header: 'DWES', content1: 'Data 2.1'},
+    {header: 'DIW', content1: 'Data 3.1'},
+    {header: 'DAW', content1: 'Data 3.1'},
+    {header: 'EIE', content1: 'Data 3.1'},
   ];
   ngOnInit(){
     // Recuperar el el token
@@ -53,7 +53,6 @@ export class ModulosComponent {
 
       // Acceder a la información de data
       const data = decodedToken.data;
-      console.log(data);
 
       // Asignar propiedades del usuario
       this.usuario.dni = data.dni;
@@ -63,6 +62,15 @@ export class ModulosComponent {
       this.usuario.email = data.Email;
       this.usuario.curso = "2023-2024";
       this.usuario.ciclo = "Desarrollo de Aplicaciones Web";
+
+      this.datos.getDatos("DWES", "2324", this.usuario.dni).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
 
     }else {
       this.router.navigate(['/login']);
