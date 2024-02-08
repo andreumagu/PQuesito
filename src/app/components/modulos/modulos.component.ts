@@ -36,7 +36,6 @@ export class ModulosComponent {
 
 
   constructor(private router: Router, private datos: DatosService) {}
-
   displayedColumns: string[] = ['header', 'content1'];
   dataSource: TableElement[] = [
     {header: 'DWEC', content1: 'Data 1.1'},
@@ -54,7 +53,6 @@ export class ModulosComponent {
 
       // Acceder a la información de data
       const data = decodedToken.data;
-      console.log(data);
 
       // Asignar propiedades del usuario
       this.usuario.dni = data.dni;
