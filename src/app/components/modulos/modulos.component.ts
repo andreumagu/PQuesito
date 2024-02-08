@@ -43,6 +43,7 @@ export class ModulosComponent {
 
       // Acceder a la información de data
       const data = decodedToken.data;
+      console.log(data);
 
       // Asignar propiedades del usuario
       this.usuario.dni = data.dni;
@@ -50,7 +51,7 @@ export class ModulosComponent {
       this.usuario.apellido1 = data.apellido1;
       this.usuario.apellido2 = data.apellido2;
       this.usuario.email = data.Email;
-      this.usuario.curso = "2n";
+      this.usuario.curso = "2023-2024";
       this.usuario.ciclo = "Desarrollo de Aplicaciones Web";
 
     }else {
