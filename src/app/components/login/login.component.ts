@@ -23,13 +23,16 @@ export class LoginComponent {
   email: string = "";
   password: string = "";
 
+
   onIniciarClick() {
     this.service.getToken(this.email, this.password).subscribe(
       response => {
+        console.log(response);
         // Almacenamos el token en una variable local
         localStorage.setItem('token', response.token);
 
-        // //Redireccionamos a la página de home
+        console.log(response);
+        //Redireccionamos a la página de home
         this.router.navigate(['/home']);
       },
       error => {
@@ -38,5 +41,6 @@ export class LoginComponent {
     );
 
   }
+
 
 }
