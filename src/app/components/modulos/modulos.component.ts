@@ -11,22 +11,23 @@ import { Usuario } from "../../models/usuario";
 import { DatosService } from "../../services/datos.service";
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
-import {Chart, ChartEvent, LegendElement, LegendItem} from "chart.js/auto";
-
+import {Chart} from "chart.js/auto";
 import {MatTableModule} from '@angular/material/table';
-import {max} from "rxjs";
+import {MatRippleModule} from '@angular/material/core';
 
 export interface TableElement {
   header: string;
   content1: string;
 }
+
 @Component({
   selector: 'app-modulos',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule],
+  imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule, MatRippleModule],
   templateUrl: './modulos.component.html',
   styleUrl: './modulos.component.css'
 })
+
 export class ModulosComponent {
   showFiller = false;
   chart: any = [];
@@ -81,11 +82,17 @@ export class ModulosComponent {
     this.chartData = {
       labels: ['DWEC', 'DWES', 'DIW', 'DAW', 'EIE'],
       datasets: [{
-        data: [2,5,3,6,7],
-        showLine: false,
-      },
-
-      ],
+        data: [2,4,6,8,10],
+        borderColor: 'rgba(0,0,0,0)',
+        backgroundColor: [
+          'rgba(147,202,226,0.7)',
+          'rgba(95,176,211,0.7)',
+          'rgba(64,160,201,0.7)',
+          'rgba(44,123,160,0.7)',
+          'rgba(50,107,136,0.7)',
+          'rgba(44,81,99,0.7)',
+        ],
+      }],
     };
 
     this.chart = new Chart('canvas', {
@@ -93,7 +100,9 @@ export class ModulosComponent {
       data: this.chartData,
       options: {
         scales: {
-
+          r: {
+            max: 10,
+          },
         },
         aspectRatio: 1.5,
         plugins: {
@@ -109,7 +118,6 @@ export class ModulosComponent {
         },
       },
     });
-
   }
 
   onClickHome (){
