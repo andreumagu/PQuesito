@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Usuario} from "../models/usuario";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +14,7 @@ export class DatosService {
 
   constructor(private httpClient: HttpClient) { }
 
-
-  getMedias(ano: string, id: string):Observable<any>{
+  getRas(modulo: string, ano: string, id: string):Observable<any>{
 
     const token = localStorage.getItem('token');
 
@@ -27,6 +25,7 @@ export class DatosService {
 
     // Definir el cuerpo de la solicitud
     const body = {
+      "modulo": modulo,
       "ano": ano,
       "id": id
     };
@@ -34,6 +33,7 @@ export class DatosService {
     // Enviar la solicitud POST con el header y el cuerpo
     return this.httpClient.post<any>(this.url, body, { headers: headers });
   }
+
 
   getMedias(ano: string, id: string):Observable<any>{
 
@@ -52,7 +52,6 @@ export class DatosService {
 
     // Enviar la solicitud POST con el header y el cuerpo
     return this.httpClient.post<any>(this.url1, body, { headers: headers });
-
   }
 
 }

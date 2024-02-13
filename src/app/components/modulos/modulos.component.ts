@@ -40,24 +40,10 @@ export class ModulosComponent {
   constructor(private router: Router, private datos: DatosService) {}
 
   displayedColumns: string[] = ['header', 'content1'];
-  dataSource: TableElement[] = [];
+  dataSource: { content1: string; header: string }[] = [];
 
-
-  displayedColumns: string[] = ['modulo', 'nota'];
-  dataSource: TableElement[] = [
-    {modulo: 'DWEC', nota: '2'},
-    {modulo: 'DWES', nota: '5'},
-    {modulo: 'DIW', nota: '3'},
-    {modulo: 'DAW', nota: '6'},
-    {modulo: 'EIE', nota: '7'},
-  ];
 
   ngOnInit(){
-
-    interface Notas {
-      [key: string]: string; // Indicamos que las claves son strings y los valores también son strings
-    }
-    let notas: Notas = {};
 
     // Recuperar el el token
     const token = localStorage.getItem('token');
@@ -76,11 +62,12 @@ export class ModulosComponent {
       this.usuario.email = data.Email;
       this.usuario.curso = "2324";
       this.usuario.ciclo = data.ciclo;
+      console.log(this.usuario);
 
       this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
         response => {
-          //Almacenamos y asignamos los datos (clave,valor) en la variable de la tabla
-          this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media}));
+          //Almacenamos y asignamos los datos (clave,valor) en la array de la tabla
+          this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media.toFixed(2)}));
 
         },
         error => {
