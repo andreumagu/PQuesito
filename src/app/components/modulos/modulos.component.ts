@@ -17,8 +17,8 @@ import {MatTableModule} from '@angular/material/table';
 import {max} from "rxjs";
 
 export interface TableElement {
-  header: string;
-  content1: string;
+  modulo: string;
+  nota: string;
 }
 @Component({
   selector: 'app-modulos',
@@ -36,15 +36,22 @@ export class ModulosComponent {
 
 
   constructor(private router: Router, private datos: DatosService) {}
-  displayedColumns: string[] = ['header', 'content1'];
+
+  displayedColumns: string[] = ['modulo', 'nota'];
   dataSource: TableElement[] = [
-    {header: 'DWEC', content1: 'Data 1.1'},
-    {header: 'DWES', content1: 'Data 2.1'},
-    {header: 'DIW', content1: 'Data 3.1'},
-    {header: 'DAW', content1: 'Data 3.1'},
-    {header: 'EIE', content1: 'Data 3.1'},
+    {modulo: 'DWEC', nota: '2'},
+    {modulo: 'DWES', nota: '5'},
+    {modulo: 'DIW', nota: '3'},
+    {modulo: 'DAW', nota: '6'},
+    {modulo: 'EIE', nota: '7'},
   ];
   ngOnInit(){
+
+    interface Notas {
+      [key: string]: string; // Indicamos que las claves son strings y los valores también son strings
+    }
+    let notas: Notas = {};
+
     // Recuperar el el token
     const token = localStorage.getItem('token');
 
@@ -60,17 +67,58 @@ export class ModulosComponent {
       this.usuario.apellido1 = data.apellido1;
       this.usuario.apellido2 = data.apellido2;
       this.usuario.email = data.Email;
-      this.usuario.curso = "2023-2024";
-      this.usuario.ciclo = "Desarrollo de Aplicaciones Web";
+      this.usuario.curso = "2324";
+      this.usuario.ciclo = data.ciclo;
 
-      this.datos.getDatos("DWES", "2324", this.usuario.dni).subscribe(
+      this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
         response => {
-          console.log(response);
+          notas = response;
+          for (let i in notas){
+            this.dataSource.push({modulo: i, nota: notas[i]});
+            console.log(this.dataSource);
+          }
         },
         error => {
           console.log(error);
         }
       );
+
+      // this.datos.getDatos(modulos[1], this.usuario.curso, this.usuario.dni).subscribe(
+      //   response => {
+      //     console.log(1);
+      //     notas = response;
+      //     console.log(notas);
+      //   },
+      //   error => {
+      //     console.log(2);
+      //     console.log(error);
+      //   }
+      // );
+      //
+      // let media = notas['Media'];
+      //
+      // if (notasModulos.hasOwnProperty(2)){
+      //   notasModulos[1] = media;
+      // }
+
+      // for (let i in modulos){
+      //   this.datos.getDatos(modulos[i], this.usuario.curso, this.usuario.dni).subscribe(
+      //     response => {
+      //       notas = response;
+      //       console.log(notas);
+      //     },
+      //     error => {
+      //       console.log(2);
+      //       console.log(error);
+      //     }
+      //   );
+      //
+      //   let media = notas['Media'];
+      //
+      //   if (notasModulos.hasOwnProperty(i)){
+      //     notasModulos[i] = media;
+      //   }
+      // }
 
     }else {
       this.router.navigate(['/login']);
