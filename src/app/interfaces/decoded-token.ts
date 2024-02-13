@@ -10,5 +10,6 @@ export interface DecodedToken {
         apellido1: string;
         apellido2: string;
         Email: string;
+        ciclo: string;
     };
 }
