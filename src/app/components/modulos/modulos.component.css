@@ -86,7 +86,7 @@ section {
   padding-top: 45px;
 
   font-weight: 800;
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: 1px;
 }
 
@@ -103,18 +103,45 @@ section {
   left: 100px;
 }
 
+.tablaNotas {
+
+}
+
+.tablaNotas th {
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.tablaNotas tr:hover {
+  background-color: rgba(211,211,211,0.5);
+}
+
 .tablaModulos p {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  padding-top: 20px;
+  padding: 25px 0 25px 0;
 
   font-weight: 800;
-  font-size: 20px;
+  font-size: 25px;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+#tablaP {
+  position: absolute;
+  bottom: 0;
+  padding: 20px 70px 20px 70px;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  font-style: italic;
+  font-size: 11px;
+  font-weight: 450;
 }
 
 .graficoModulos {
@@ -132,7 +159,6 @@ section {
 
 #canvas {
   position: relative;
-
 }
 
 .graficoModulos p {
