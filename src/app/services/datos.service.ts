@@ -12,10 +12,11 @@ export class DatosService {
   private url1 = 'http://10.116.0.219:8888/WS/php-excel/mediasexcel.php';
 
 
+
   constructor(private httpClient: HttpClient) { }
 
 
-  getDatos(modul: string, ano: string, id: string):Observable<any>{
+  getMedias(ano: string, id: string):Observable<any>{
 
     const token = localStorage.getItem('token');
 
@@ -26,14 +27,12 @@ export class DatosService {
 
     // Definir el cuerpo de la solicitud
     const body = {
-      "modul": modul,
       "ano": ano,
       "id": id
     };
 
     // Enviar la solicitud POST con el header y el cuerpo
     return this.httpClient.post<any>(this.url, body, { headers: headers });
-
   }
 
   getMedias(ano: string, id: string):Observable<any>{

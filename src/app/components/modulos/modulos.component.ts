@@ -35,8 +35,13 @@ export class ModulosComponent {
 
   usuario = new Usuario("", "", "", "", "", "", "");
 
+  datosMedias: any;
 
   constructor(private router: Router, private datos: DatosService) {}
+
+  displayedColumns: string[] = ['header', 'content1'];
+  dataSource: TableElement[] = [];
+
 
   displayedColumns: string[] = ['modulo', 'nota'];
   dataSource: TableElement[] = [
@@ -46,6 +51,7 @@ export class ModulosComponent {
     {modulo: 'DAW', nota: '6'},
     {modulo: 'EIE', nota: '7'},
   ];
+
   ngOnInit(){
 
     interface Notas {
@@ -73,11 +79,9 @@ export class ModulosComponent {
 
       this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
         response => {
-          notas = response;
-          for (let i in notas){
-            this.dataSource.push({modulo: i, nota: notas[i]});
-            console.log(this.dataSource);
-          }
+          //Almacenamos y asignamos los datos (clave,valor) en la variable de la tabla
+          this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media}));
+
         },
         error => {
           console.log(error);
@@ -166,7 +170,7 @@ export class ModulosComponent {
     });
   }
 
-  onClickHome (){
+  onClickHome(){
     this.router.navigate(['/home']);
   }
 
