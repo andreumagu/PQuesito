@@ -31,7 +31,6 @@ export class LoginComponent {
         // Almacenamos el token en una variable local
         localStorage.setItem('token', response.token);
 
-        console.log(response);
         //Redireccionamos a la página de home
         this.router.navigate(['/home']);
       },

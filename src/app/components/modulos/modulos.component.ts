@@ -34,16 +34,11 @@ export class ModulosComponent {
 
   usuario = new Usuario("", "", "", "", "", "", "");
 
+  datosMedias: any;
 
   constructor(private router: Router, private datos: DatosService) {}
   displayedColumns: string[] = ['header', 'content1'];
-  dataSource: TableElement[] = [
-    {header: 'DWEC', content1: 'Data 1.1'},
-    {header: 'DWES', content1: 'Data 2.1'},
-    {header: 'DIW', content1: 'Data 3.1'},
-    {header: 'DAW', content1: 'Data 3.1'},
-    {header: 'EIE', content1: 'Data 3.1'},
-  ];
+  dataSource: TableElement[] = [];
   ngOnInit(){
     // Recuperar el el token
     const token = localStorage.getItem('token');
@@ -63,9 +58,11 @@ export class ModulosComponent {
       this.usuario.curso = "2023-2024";
       this.usuario.ciclo = "Desarrollo de Aplicaciones Web";
 
-      this.datos.getDatos("DWES", "2324", this.usuario.dni).subscribe(
+      this.datos.getMedias("2324", this.usuario.dni).subscribe(
         response => {
           console.log(response);
+          //Almacenamos y asignamos los datos (clave,valor) en la variable de la tabla
+          this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media}));
         },
         error => {
           console.log(error);
@@ -110,7 +107,7 @@ export class ModulosComponent {
 
   }
 
-  onClickHome (){
+  onClickHome(){
     this.router.navigate(['/home']);
   }
 
