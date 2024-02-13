@@ -16,49 +16,37 @@ import {MatTableModule} from '@angular/material/table';
 import {MatRippleModule} from '@angular/material/core';
 
 export interface TableElement {
-  modulo: string;
-  nota: string;
+  header: string;
+  content1: string;
 }
 
 @Component({
-  selector: 'app-modulos',
+  selector: 'app-ra',
   standalone: true,
   imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule, MatRippleModule],
-  templateUrl: './modulos.component.html',
-  styleUrl: './modulos.component.css'
+  templateUrl: './ra.component.html',
+  styleUrl: './ra.component.css'
 })
 
-export class ModulosComponent {
+export class RaComponent {
   showFiller = false;
   chart: any = [];
   chartData: any = [];
 
   usuario = new Usuario("", "", "", "", "", "", "");
 
-  datosMedias: any;
 
   constructor(private router: Router, private datos: DatosService) {}
 
   displayedColumns: string[] = ['header', 'content1'];
-  dataSource: TableElement[] = [];
-
-
-  displayedColumns: string[] = ['modulo', 'nota'];
   dataSource: TableElement[] = [
-    {modulo: 'DWEC', nota: '2'},
-    {modulo: 'DWES', nota: '5'},
-    {modulo: 'DIW', nota: '3'},
-    {modulo: 'DAW', nota: '6'},
-    {modulo: 'EIE', nota: '7'},
+    {header: 'RA1', content1: 'Data 1.1'},
+    {header: 'RA2', content1: 'Data 2.1'},
+    {header: 'RA3', content1: 'Data 3.1'},
+    {header: 'RA4', content1: 'Data 3.1'},
+    {header: 'RA5', content1: 'Data 3.1'},
   ];
-
   ngOnInit(){
-
-    interface Notas {
-      [key: string]: string; // Indicamos que las claves son strings y los valores también son strings
-    }
-    let notas: Notas = {};
-
     // Recuperar el el token
     const token = localStorage.getItem('token');
 
@@ -67,6 +55,7 @@ export class ModulosComponent {
 
       // Acceder a la información de data
       const data = decodedToken.data;
+      console.log(data);
 
       // Asignar propiedades del usuario
       this.usuario.dni = data.dni;
@@ -74,56 +63,17 @@ export class ModulosComponent {
       this.usuario.apellido1 = data.apellido1;
       this.usuario.apellido2 = data.apellido2;
       this.usuario.email = data.Email;
-      this.usuario.curso = "2324";
-      this.usuario.ciclo = data.ciclo;
+      this.usuario.curso = "2023-2024";
+      this.usuario.ciclo = "Desarrollo de Aplicaciones Web";
 
-      this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
+      this.datos.getDatos("DWES", "2324", this.usuario.dni).subscribe(
         response => {
-          //Almacenamos y asignamos los datos (clave,valor) en la variable de la tabla
-          this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media}));
-
+          console.log(response);
         },
         error => {
           console.log(error);
         }
       );
-
-      // this.datos.getDatos(modulos[1], this.usuario.curso, this.usuario.dni).subscribe(
-      //   response => {
-      //     console.log(1);
-      //     notas = response;
-      //     console.log(notas);
-      //   },
-      //   error => {
-      //     console.log(2);
-      //     console.log(error);
-      //   }
-      // );
-      //
-      // let media = notas['Media'];
-      //
-      // if (notasModulos.hasOwnProperty(2)){
-      //   notasModulos[1] = media;
-      // }
-
-      // for (let i in modulos){
-      //   this.datos.getDatos(modulos[i], this.usuario.curso, this.usuario.dni).subscribe(
-      //     response => {
-      //       notas = response;
-      //       console.log(notas);
-      //     },
-      //     error => {
-      //       console.log(2);
-      //       console.log(error);
-      //     }
-      //   );
-      //
-      //   let media = notas['Media'];
-      //
-      //   if (notasModulos.hasOwnProperty(i)){
-      //     notasModulos[i] = media;
-      //   }
-      // }
 
     }else {
       this.router.navigate(['/login']);
@@ -170,7 +120,7 @@ export class ModulosComponent {
     });
   }
 
-  onClickHome(){
+  onClickHome (){
     this.router.navigate(['/home']);
   }
 
