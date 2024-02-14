@@ -12,9 +12,9 @@ import {RaComponent} from "./components/ra/ra.component";
 
 export const routes: Routes = [
   {path:'', redirectTo:'/login', pathMatch:'full'},
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  { path: 'modulos', component: ModulosComponent, canActivate: [ModuleGuard] },
-  { path: 'ra', component: RaComponent, canActivate: [ModuleGuard] },
+  {path: 'modulos', component: ModulosComponent, canActivate: [ModuleGuard]},
+  {path: 'ra', component: RaComponent, canActivate: [ModuleGuard]},
   {path:'**', component:PageNotFoundComponent}
 ];
