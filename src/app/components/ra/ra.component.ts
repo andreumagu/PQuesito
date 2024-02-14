@@ -39,6 +39,7 @@ export class RaComponent {
 
   constructor(private router: Router, private datos: DatosService, private activatedRoute: ActivatedRoute) {}
 
+
   displayedColumns: string[] = ['header', 'content1'];
   dataSource: TableElement[] = [];
   ngOnInit(){
