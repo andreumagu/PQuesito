@@ -18,6 +18,7 @@ import {MatRippleModule} from '@angular/material/core';
 export interface TableElement {
   header: string;
   content1: string;
+  content2: string;
 }
 
 @Component({
@@ -37,6 +38,7 @@ export class RaComponent {
 
 
   constructor(private router: Router, private datos: DatosService, private activatedRoute: ActivatedRoute) {}
+
 
   displayedColumns: string[] = ['header', 'content1'];
   dataSource: TableElement[] = [];
