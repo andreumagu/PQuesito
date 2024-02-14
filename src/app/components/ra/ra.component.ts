@@ -16,8 +16,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatRippleModule} from '@angular/material/core';
 
 export interface TableElement {
-  header: string;
-  content1: string;
+  ra: string;
+  porcentaje: string;
+  nota: string;
 }
 
 @Component({
@@ -38,13 +39,13 @@ export class RaComponent {
 
   constructor(private router: Router, private datos: DatosService) {}
 
-  displayedColumns: string[] = ['header', 'content1'];
+  displayedColumns: string[] = ['ra', 'porcentaje', 'nota'];
   dataSource: TableElement[] = [
-    {header: 'RA1', content1: 'Data 1.1'},
-    {header: 'RA2', content1: 'Data 2.1'},
-    {header: 'RA3', content1: 'Data 3.1'},
-    {header: 'RA4', content1: 'Data 3.1'},
-    {header: 'RA5', content1: 'Data 3.1'},
+    {ra: 'RA1', porcentaje: '20%', nota: '7'},
+    {ra: 'RA2', porcentaje: '20%', nota: '6'},
+    {ra: 'RA3', porcentaje: '20%', nota: '9'},
+    {ra: 'RA4', porcentaje: '20%', nota: '4'},
+    {ra: 'RA5', porcentaje: '20%', nota: '5'},
   ];
   ngOnInit(){
     // Recuperar el el token
