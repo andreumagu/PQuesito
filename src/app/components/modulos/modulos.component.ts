@@ -52,11 +52,11 @@ export class ModulosComponent {
       this.usuario.apellido1 = data.apellido1;
       this.usuario.apellido2 = data.apellido2;
       this.usuario.email = data.Email;
-      this.usuario.curso = "2023-2024";
+      this.usuario.curso = "2324";
       this.usuario.ciclo = data.ciclo;
 
       // Llama al servicio para obtener las notas medias
-      this.datos.getMedias("2324", this.usuario.dni).subscribe(
+      this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
         response => {
           console.log(response);
           // Comprueba si hay datos de notas medias recibidos
