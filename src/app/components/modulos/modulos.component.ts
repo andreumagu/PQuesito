@@ -10,15 +10,9 @@ import { jwtDecode } from "jwt-decode";
 import { Usuario } from "../../models/usuario";
 import { DatosService } from "../../services/datos.service";
 import { Router } from "@angular/router";
-import { LoginService } from "../../services/login.service";
 import {Chart} from "chart.js/auto";
 import {MatTableModule} from '@angular/material/table';
 import {MatRippleModule} from '@angular/material/core';
-
-export interface TableElement {
-  modulo: string;
-  nota: string;
-}
 
 @Component({
   selector: 'app-modulos',
@@ -34,8 +28,6 @@ export class ModulosComponent {
   chartData: any = [];
 
   usuario = new Usuario("", "", "", "", "", "", "");
-
-  datosMedias: any;
 
   constructor(private router: Router, private datos: DatosService) {}
 
@@ -62,18 +54,51 @@ export class ModulosComponent {
       this.usuario.email = data.Email;
       this.usuario.curso = "2324";
       this.usuario.ciclo = data.ciclo;
-      console.log(this.usuario);
 
       this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
         response => {
+          console.log(response);
           //Almacenamos y asignamos los datos (clave,valor) en la array de la tabla
           this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media.toFixed(2)}));
+          console.log(this.dataSource);
 
+          this.chartData = {
+            labels: this.dataSource.map(item => item.header),
+            datasets: [{
+              data: this.dataSource.map(item => item.content1),
+              showLine: false,
+            }],
+          };
+
+          this.chart = new Chart('canvas', {
+            type: 'polarArea',
+            data: this.chartData,
+            options: {
+              scales: {
+                r: {
+                  max: 10,
+                },
+              },
+              aspectRatio: 1.5,
+              plugins: {
+                legend: {
+                  position: "bottom",
+                  labels: {
+                    font: {
+                      family: 'Montserrat',
+                      weight: 800,
+                    }
+                  }
+                }
+              },
+            },
+          });
         },
         error => {
           console.log(error);
         }
       );
+
 
       // this.datos.getDatos(modulos[1], this.usuario.curso, this.usuario.dni).subscribe(
       //   response => {
@@ -116,45 +141,11 @@ export class ModulosComponent {
       this.router.navigate(['/login']);
     }
 
-    this.chartData = {
-      labels: ['DWEC', 'DWES', 'DIW', 'DAW', 'EIE'],
-      datasets: [{
-        data: [2,4,6,8,10],
-        borderColor: 'rgba(0,0,0,0)',
-        backgroundColor: [
-          'rgba(147,202,226,0.7)',
-          'rgba(95,176,211,0.7)',
-          'rgba(64,160,201,0.7)',
-          'rgba(44,123,160,0.7)',
-          'rgba(50,107,136,0.7)',
-          'rgba(44,81,99,0.7)',
-        ],
-      }],
-    };
 
-    this.chart = new Chart('canvas', {
-      type: 'polarArea',
-      data: this.chartData,
-      options: {
-        scales: {
-          r: {
-            max: 10,
-          },
-        },
-        aspectRatio: 1.5,
-        plugins: {
-          legend: {
-            position: "bottom",
-            labels: {
-              font: {
-                family: 'Montserrat',
-                weight: 800,
-              }
-            }
-          }
-        },
-      },
-    });
+  }
+
+  onClickModulo(modulo: string){
+    this.router.navigate(['/ra'], { queryParams: { modulo: modulo } });
   }
 
   onClickHome(){
