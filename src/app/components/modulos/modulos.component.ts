@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,23 +10,21 @@ import { Usuario } from "../../models/usuario";
 import { DatosService } from "../../services/datos.service";
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
-import {Chart} from "chart.js/auto";
+import {Chart, ChartEvent, LegendElement, LegendItem} from "chart.js/auto";
 import {MatTableModule} from '@angular/material/table';
-import {MatRippleModule} from '@angular/material/core';
+import {max} from "rxjs";
 
 export interface TableElement {
-  modulo: string;
-  nota: string;
+  header: string;
+  content1: string;
 }
-
 @Component({
   selector: 'app-modulos',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule, MatRippleModule],
+  imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule],
   templateUrl: './modulos.component.html',
   styleUrl: './modulos.component.css'
 })
-
 export class ModulosComponent {
   showFiller = false;
   chart: any = [];
@@ -35,16 +32,11 @@ export class ModulosComponent {
 
   usuario = new Usuario("", "", "", "", "", "", "");
 
-  datosMedias: any;
 
   constructor(private router: Router, private datos: DatosService) {}
-
   displayedColumns: string[] = ['header', 'content1'];
-  dataSource: { content1: string; header: string }[] = [];
-
-
+  dataSource: TableElement[] = [];
   ngOnInit(){
-
     // Recuperar el el token
     const token = localStorage.getItem('token');
 
@@ -60,86 +52,60 @@ export class ModulosComponent {
       this.usuario.apellido1 = data.apellido1;
       this.usuario.apellido2 = data.apellido2;
       this.usuario.email = data.Email;
-      this.usuario.curso = "2324";
+      this.usuario.curso = "2023-2024";
       this.usuario.ciclo = data.ciclo;
-      console.log(this.usuario);
 
-      this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
+      // Llama al servicio para obtener las notas medias
+      this.datos.getMedias("2324", this.usuario.dni).subscribe(
         response => {
-          //Almacenamos y asignamos los datos (clave,valor) en la array de la tabla
-          this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media.toFixed(2)}));
+          console.log(response);
+          // Comprueba si hay datos de notas medias recibidos
+          if (response) {
+            // Mapea los datos recibidos para adaptarlos a la estructura de la tabla
+            this.dataSource = Object.keys(response).map(key => ({ header: key, content1: response[key].Media }));
 
+            // Actualiza los datos del gráfico con los datos de la tabla
+            this.chartData = {
+              labels: this.dataSource.map(item => item.header),
+              datasets: [{
+                data: this.dataSource.map(item => item.content1),
+                showLine: false,
+              }],
+            };
+
+            // Actualiza el gráfico con los nuevos datos
+            this.chart.data = this.chartData;
+            this.chart.update();
+          } else {
+            console.log('No hay datos de notas medias disponibles para mostrar.');
+          }
         },
         error => {
           console.log(error);
         }
       );
 
-      // this.datos.getDatos(modulos[1], this.usuario.curso, this.usuario.dni).subscribe(
-      //   response => {
-      //     console.log(1);
-      //     notas = response;
-      //     console.log(notas);
-      //   },
-      //   error => {
-      //     console.log(2);
-      //     console.log(error);
-      //   }
-      // );
-      //
-      // let media = notas['Media'];
-      //
-      // if (notasModulos.hasOwnProperty(2)){
-      //   notasModulos[1] = media;
-      // }
-
-      // for (let i in modulos){
-      //   this.datos.getDatos(modulos[i], this.usuario.curso, this.usuario.dni).subscribe(
-      //     response => {
-      //       notas = response;
-      //       console.log(notas);
-      //     },
-      //     error => {
-      //       console.log(2);
-      //       console.log(error);
-      //     }
-      //   );
-      //
-      //   let media = notas['Media'];
-      //
-      //   if (notasModulos.hasOwnProperty(i)){
-      //     notasModulos[i] = media;
-      //   }
-      // }
-
     }else {
       this.router.navigate(['/login']);
     }
 
-    this.chartData = {
+    /*this.chartData = {
       labels: ['DWEC', 'DWES', 'DIW', 'DAW', 'EIE'],
       datasets: [{
-        data: [2,4,6,8,10],
-        borderColor: 'rgba(0,0,0,0)',
-        backgroundColor: [
-          'rgba(147,202,226,0.7)',
-          'rgba(95,176,211,0.7)',
-          'rgba(64,160,201,0.7)',
-          'rgba(44,123,160,0.7)',
-          'rgba(50,107,136,0.7)',
-          'rgba(44,81,99,0.7)',
-        ],
-      }],
-    };
+        data: [2,5,3,6,7],
+        showLine: false,
+      },
+     ],
+    }; */
 
     this.chart = new Chart('canvas', {
       type: 'polarArea',
       data: this.chartData,
       options: {
         scales: {
-          r: {
-            max: 10,
-          },
+          r:{
+            max:10,
+          }
         },
         aspectRatio: 1.5,
         plugins: {

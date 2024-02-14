@@ -66,14 +66,14 @@ export class RaComponent {
       this.usuario.curso = "2023-2024";
       this.usuario.ciclo = "Desarrollo de Aplicaciones Web";
 
-      // this.datos.getRas("DWES", "2324", this.usuario.dni).subscribe(
-      //   response => {
-      //     console.log(response);
-      //   },
-      //   error => {
-      //     console.log(error);
-      //   }
-      // );
+      this.datos.getMedias("2324", this.usuario.dni).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
 
     }else {
       this.router.navigate(['/login']);
