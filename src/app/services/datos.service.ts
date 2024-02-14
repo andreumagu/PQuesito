@@ -7,8 +7,8 @@ import {Observable} from "rxjs";
 })
 export class DatosService {
 
-  private url = 'http://10.116.0.219:8888/WS/php-excel/readexcel.php';
-  private url1 = 'http://10.116.0.219:8888/WS/php-excel/mediasexcel.php';
+  private url = 'http://cicloweb.cesurformacion.com/API/php-excel/raexcel.php';
+  private url1 = 'http://cicloweb.cesurformacion.com/API/php-excel/mediasexcel.php';
 
 
 
@@ -25,7 +25,7 @@ export class DatosService {
 
     // Definir el cuerpo de la solicitud
     const body = {
-      "modulo": modulo,
+      "modul": modulo,
       "ano": ano,
       "id": id
     };

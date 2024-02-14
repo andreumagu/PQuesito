@@ -5,6 +5,7 @@ import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.
 import {ModulosComponent} from "./components/modulos/modulos.component";
 import {AuthGuard} from "./auth.guard";
 import {ModuleGuard} from "./module.guard";
+import {RaComponent} from "./components/ra/ra.component";
 
 
 
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {path: 'login', component: LoginComponent},
   { path: 'modulos', component: ModulosComponent, canActivate: [ModuleGuard] },
+  { path: 'ra', component: RaComponent, canActivate: [ModuleGuard] },
   {path:'**', component:PageNotFoundComponent}
 ];
