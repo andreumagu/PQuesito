@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,33 +11,42 @@ import { Usuario } from "../../models/usuario";
 import { DatosService } from "../../services/datos.service";
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
-import {Chart, ChartEvent, LegendElement, LegendItem} from "chart.js/auto";
+import {Chart} from "chart.js/auto";
 import {MatTableModule} from '@angular/material/table';
-import {max} from "rxjs";
-
+import {MatRippleModule} from '@angular/material/core';
 
 export interface TableElement {
-  header: string;
-  content1: string;
+  criterios: string;
+  porcentaje: string;
+  nota: string;
 }
 
 @Component({
-  selector: 'app-modulos',
+  selector: 'app-ce',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule],
-  templateUrl: './modulos.component.html',
-  styleUrl: './modulos.component.css'
+  imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule, MatRippleModule],
+  templateUrl: './ce.component.html',
+  styleUrl: './ce.component.css'
 })
-export class ModulosComponent {
+
+export class CeComponent {
   showFiller = false;
   chart: any = [];
   chartData: any = [];
 
   usuario = new Usuario("", "", "", "", "", "", "");
 
+
   constructor(private router: Router, private datos: DatosService) {}
-  displayedColumns: string[] = ['header', 'content1'];
-  dataSource: TableElement[] = [];
+
+  displayedColumns: string[] = ['criterios', 'porcentaje', 'nota'];
+  dataSource: TableElement[] = [
+    {criterios: 'Criterio 1', porcentaje: '20%', nota: '5'},
+    {criterios: 'Criterio 2', porcentaje: '20%', nota: '4'},
+    {criterios: 'Criterio 3', porcentaje: '20%', nota: '9'},
+    {criterios: 'Criterio 4', porcentaje: '20%', nota: '8'},
+    {criterios: 'Criterio 5', porcentaje: '20%', nota: '5'},
+  ];
   ngOnInit(){
     // Recuperar el el token
     const token = localStorage.getItem('token');
@@ -46,6 +56,7 @@ export class ModulosComponent {
 
       // Acceder a la información de data
       const data = decodedToken.data;
+      console.log(data);
 
       // Asignar propiedades del usuario
       this.usuario.dni = data.dni;
@@ -53,52 +64,46 @@ export class ModulosComponent {
       this.usuario.apellido1 = data.apellido1;
       this.usuario.apellido2 = data.apellido2;
       this.usuario.email = data.Email;
-      this.usuario.curso = "2324";
-      this.usuario.ciclo = data.ciclo;
+      this.usuario.curso = "2023-2024";
+      this.usuario.ciclo = "Desarrollo de Aplicaciones Web";
 
-      // Llama al servicio para obtener las notas medias
-      this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
+      this.datos.getDatos("DWES", "2324", this.usuario.dni).subscribe(
         response => {
           console.log(response);
-          // Comprueba si hay datos de notas medias recibidos
-          if (response) {
-            // Mapea los datos recibidos para adaptarlos a la estructura de la tabla
-            this.dataSource = Object.keys(response).map(key => ({ header: key, content1: response[key].Media }));
-
-            // Actualiza los datos del gráfico con los datos de la tabla
-            this.chartData = {
-              labels: this.dataSource.map(item => item.header),
-              datasets: [{
-                data: this.dataSource.map(item => item.content1),
-                showLine: false,
-              }],
-            };
-
-            // Actualiza el gráfico con los nuevos datos
-            this.chart.data = this.chartData;
-            this.chart.update();
-          } else {
-            console.log('No hay datos de notas medias disponibles para mostrar.');
-          }
-
         },
         error => {
           console.log(error);
         }
       );
-      
+
     }else {
       this.router.navigate(['/login']);
     }
+
+    this.chartData = {
+      labels: ['DWEC', 'DWES', 'DIW', 'DAW', 'EIE'],
+      datasets: [{
+        data: [2,4,6,8,10],
+        borderColor: 'rgba(0,0,0,0)',
+        backgroundColor: [
+          'rgba(147,202,226,0.7)',
+          'rgba(95,176,211,0.7)',
+          'rgba(64,160,201,0.7)',
+          'rgba(44,123,160,0.7)',
+          'rgba(50,107,136,0.7)',
+          'rgba(44,81,99,0.7)',
+        ],
+      }],
+    };
 
     this.chart = new Chart('canvas', {
       type: 'polarArea',
       data: this.chartData,
       options: {
         scales: {
-          r:{
-            max:10,
-          }
+          r: {
+            max: 10,
+          },
         },
         aspectRatio: 1.5,
         plugins: {
@@ -114,14 +119,9 @@ export class ModulosComponent {
         },
       },
     });
-
   }
 
-  onClickModulo(modulo: string){
-    this.router.navigate(['/ra'], { queryParams: { modulo: modulo } });
-  }
-
-  onClickHome(){
+  onClickHome (){
     this.router.navigate(['/home']);
   }
 

@@ -44,21 +44,21 @@
         <table mat-table [dataSource]="dataSource" class="tablaNotas">
 
           <!-- Columna de Cabecera -->
-          <ng-container matColumnDef="ra">
-            <th mat-header-cell *matHeaderCellDef> RA </th>
-            <td mat-cell *matCellDef="let element"> {{element.header}} </td>
+          <ng-container matColumnDef="criterios">
+            <th mat-header-cell *matHeaderCellDef> Criterios de evaluacion </th>
+            <td mat-cell *matCellDef="let element"> {{element.criterios}} </td>
           </ng-container>
 
           <!-- Columna de Contenido 1 -->
           <ng-container matColumnDef="porcentaje">
             <th mat-header-cell *matHeaderCellDef> Porcentaje </th>
-            <td mat-cell *matCellDef="let element"> {{element.content1}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.porcentaje}} </td>
           </ng-container>
 
           <!-- Columna de Contenido 2 -->
           <ng-container matColumnDef="nota">
             <th mat-header-cell *matHeaderCellDef> Nota </th>
-            <td mat-cell *matCellDef="let element"> {{element.content2}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.nota}} </td>
           </ng-container>
 
           <!-- Filas de Datos -->

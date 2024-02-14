@@ -18,6 +18,7 @@ import {MatRippleModule} from '@angular/material/core';
 export interface TableElement {
   header: string;
   content1: string;
+  content2: string;
 }
 
 @Component({
