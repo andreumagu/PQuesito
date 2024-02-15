@@ -10,9 +10,8 @@ import { Usuario } from "../../models/usuario";
 import { DatosService } from "../../services/datos.service";
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
-import {Chart, ChartEvent, LegendElement, LegendItem} from "chart.js/auto";
+import {Chart} from "chart.js/auto";
 import {MatTableModule} from '@angular/material/table';
-import {max} from "rxjs";
 
 
 export interface TableElement {
@@ -86,7 +85,7 @@ export class ModulosComponent {
           console.log(error);
         }
       );
-      
+
     }else {
       this.router.navigate(['/login']);
     }
