@@ -4,7 +4,7 @@
 
 <body style="background-image: url('assets/elipses.png')">
 <!-- Elipses decorativas -->
-  <div class="container">
+  <div class="container-fluid">
 
       <!-- Logo cesur -->
       <img class="logo" src="assets/logo-cesur-2023-b&y.png" alt="Logo Cesur">
@@ -14,7 +14,7 @@
       <p>Bienvenido/a, {{ usuario.nombre }}!<!-- Variable de los alumnos --> </p>
 
       <!-- Botón ver notas -->
-      <a mat-raised-button (click)="onClick()">ver mis notas</a>
+      <a mat-raised-button class="bNotas" (click)="onClick()">ver mis notas</a>
       </div>
 
       <div class="frameFrasesMot">

@@ -18,7 +18,7 @@ body {
   height: 100vh;
 }
 
-.container {
+.container-fluid {
   background-color: #ECF2F8;
   border-radius: 25px;
   box-shadow: 0px 0px 4.4px 4px rgba(0, 0, 0, 0.25);
@@ -29,13 +29,13 @@ body {
   min-height: 800px;
 }
 
-.container .logo {
+.container-fluid .logo {
   margin: 30px 0 30px 30px;
   width: 250px;
   height: 70px;
 }
 
-.container .infoAlu{
+.container-fluid .infoAlu{
   font-size: medium;
   color: black;
   font-weight: bold;
@@ -44,7 +44,7 @@ body {
   text-align: center;
 }
 
-.container .infoAlu p {
+.container-fluid .infoAlu p {
   font-size: 35px;
   font-weight: bolder;
   letter-spacing: 2px;
@@ -52,7 +52,11 @@ body {
   margin-bottom: 120px;
 }
 
-.container .frameFrasesMot {
+.container-fluid .bNotas {
+  padding: 0 16px 0 16px;
+}
+
+.container-fluid .frameFrasesMot {
   text-align: right;
   font-style: italic;
   margin-top: 150px;
