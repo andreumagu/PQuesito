@@ -57,10 +57,8 @@ export class ModulosComponent {
 
       this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
         response => {
-          console.log(response);
           //Almacenamos y asignamos los datos (clave,valor) en la array de la tabla
           this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media.toFixed(2)}));
-          console.log(this.dataSource);
 
           this.chartData = {
             labels: this.dataSource.map(item => item.header),
@@ -98,44 +96,6 @@ export class ModulosComponent {
           console.log(error);
         }
       );
-
-
-      // this.datos.getDatos(modulos[1], this.usuario.curso, this.usuario.dni).subscribe(
-      //   response => {
-      //     console.log(1);
-      //     notas = response;
-      //     console.log(notas);
-      //   },
-      //   error => {
-      //     console.log(2);
-      //     console.log(error);
-      //   }
-      // );
-      //
-      // let media = notas['Media'];
-      //
-      // if (notasModulos.hasOwnProperty(2)){
-      //   notasModulos[1] = media;
-      // }
-
-      // for (let i in modulos){
-      //   this.datos.getDatos(modulos[i], this.usuario.curso, this.usuario.dni).subscribe(
-      //     response => {
-      //       notas = response;
-      //       console.log(notas);
-      //     },
-      //     error => {
-      //       console.log(2);
-      //       console.log(error);
-      //     }
-      //   );
-      //
-      //   let media = notas['Media'];
-      //
-      //   if (notasModulos.hasOwnProperty(i)){
-      //     notasModulos[i] = media;
-      //   }
-      // }
 
     }else {
       this.router.navigate(['/login']);

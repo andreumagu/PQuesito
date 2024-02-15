@@ -115,6 +115,7 @@ section {
 
 .tablaNotas tr:hover {
   background-color: rgba(211,211,211,0.5);
+  cursor: pointer;
 }
 
 .tablaModulos p {
@@ -167,12 +168,18 @@ section {
   justify-content: center;
   flex-direction: column;
 
-  padding-top: 40px;
 
   font-weight: 800;
   font-size: 20px;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.textoCiclo {
+  padding-top: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
 }
 
 .sobreTexto {

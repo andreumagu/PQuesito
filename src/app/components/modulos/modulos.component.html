@@ -36,7 +36,7 @@
 
         <!-- Contenedores con las notas -->
         <div class="nombreModulos">
-            <p>{{usuario.nombre}}</p>
+            <p>{{usuario.nombre}} {{usuario.apellido1}} {{usuario.apellido2}}</p>
         </div>
         <div class="tablaModulos">
             <p>Notas</p>
@@ -65,7 +65,8 @@
         </div>
         <div class="graficoModulos">
             <div class="sobreTexto">
-                <p>2023-2024 | {{usuario.ciclo}}</p>
+                <p class="textoCiclo">{{usuario.ciclo}}</p>
+                <p class="anoCiclo">{{usuario.curso}}</p>
             </div>
             <canvas id="canvas" ></canvas>
         </div>
