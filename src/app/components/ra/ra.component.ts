@@ -36,11 +36,13 @@ export class RaComponent {
 
   usuario = new Usuario("", "", "", "", "", "", "");
 
+  modulo: string = "";
 
   constructor(private router: Router, private datos: DatosService, private activatedRoute: ActivatedRoute) {}
 
-  displayedColumns: string[] = ['header', 'content1'];
-  dataSource: TableElement[] = [];
+
+  displayedColumns: string[] = ['header', 'content1', "content2"];
+  dataSource: any[] = [];
   ngOnInit(){
 
 
@@ -64,16 +66,16 @@ export class RaComponent {
       this.usuario.ciclo = data.ciclo;
 
       this.activatedRoute.queryParams.subscribe(params => {
-        const modulo = params['modulo'];
-        this.datos.getRas(modulo, this.usuario.curso, this.usuario.dni).subscribe(
+        this.modulo = params['modulo'];
+        this.datos.getRas(this.modulo, this.usuario.curso, this.usuario.dni).subscribe(
             response => {
               console.log(response);
               //Almacenamos y asignamos los datos (clave,valor) en la array de la tabla
-              this.dataSource = Object.keys(response.Notas).map(key => ({
+               this.dataSource = Object.keys(response.Notas).map(key => ({
                 header: key,
-                content1: response.Notas[key].Nota.toFixed(2) // Redondear a 2 decimales
+                content1: (response.Notas[key].Nota.toFixed(2)).toString(),
+                content2: (response.Notas[key].Porcentaje.toFixed(3) * 100).toString() + "%"
               }));
-              console.log(this.dataSource);
               this.chartData = {
                 labels: this.dataSource.map(item => item.header),
                 datasets: [{
@@ -116,6 +118,10 @@ export class RaComponent {
     }
 
 
+  }
+
+  onClickRa(ra: string){
+    this.router.navigate(['/ce'], { queryParams: { modulo: this.modulo, ra: ra } });
   }
 
   onClickHome (){

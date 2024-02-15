@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
@@ -14,18 +15,14 @@ import {Chart} from "chart.js/auto";
 import {MatTableModule} from '@angular/material/table';
 
 
-export interface TableElement {
-  header: string;
-  content1: string;
-}
-
 @Component({
   selector: 'app-modulos',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule],
+  imports: [MatSidenavModule, MatButtonModule, MatSelectModule, MatIconModule, MatDividerModule, MatTableModule, MatRippleModule],
   templateUrl: './modulos.component.html',
   styleUrl: './modulos.component.css'
 })
+
 export class ModulosComponent {
   showFiller = false;
   chart: any = [];
@@ -34,9 +31,13 @@ export class ModulosComponent {
   usuario = new Usuario("", "", "", "", "", "", "");
 
   constructor(private router: Router, private datos: DatosService) {}
+
   displayedColumns: string[] = ['header', 'content1'];
-  dataSource: TableElement[] = [];
+  dataSource: { content1: string; header: string }[] = [];
+
+
   ngOnInit(){
+
     // Recuperar el el token
     const token = localStorage.getItem('token');
 
@@ -55,31 +56,42 @@ export class ModulosComponent {
       this.usuario.curso = "2324";
       this.usuario.ciclo = data.ciclo;
 
-      // Llama al servicio para obtener las notas medias
       this.datos.getMedias(this.usuario.curso, this.usuario.dni).subscribe(
         response => {
-          console.log(response);
-          // Comprueba si hay datos de notas medias recibidos
-          if (response) {
-            // Mapea los datos recibidos para adaptarlos a la estructura de la tabla
-            this.dataSource = Object.keys(response).map(key => ({ header: key, content1: response[key].Media }));
+          //Almacenamos y asignamos los datos (clave,valor) en la array de la tabla
+          this.dataSource =  Object.keys(response).map(key => ({header: key, content1: response[key].Media.toFixed(2)}));
 
-            // Actualiza los datos del gráfico con los datos de la tabla
-            this.chartData = {
-              labels: this.dataSource.map(item => item.header),
-              datasets: [{
-                data: this.dataSource.map(item => item.content1),
-                showLine: false,
-              }],
-            };
+          this.chartData = {
+            labels: this.dataSource.map(item => item.header),
+            datasets: [{
+              data: this.dataSource.map(item => item.content1),
+              showLine: false,
+            }],
+          };
 
-            // Actualiza el gráfico con los nuevos datos
-            this.chart.data = this.chartData;
-            this.chart.update();
-          } else {
-            console.log('No hay datos de notas medias disponibles para mostrar.');
-          }
-
+          this.chart = new Chart('canvas', {
+            type: 'polarArea',
+            data: this.chartData,
+            options: {
+              scales: {
+                r: {
+                  max: 10,
+                },
+              },
+              aspectRatio: 1.5,
+              plugins: {
+                legend: {
+                  position: "bottom",
+                  labels: {
+                    font: {
+                      family: 'Montserrat',
+                      weight: 800,
+                    }
+                  }
+                }
+              },
+            },
+          });
         },
         error => {
           console.log(error);
@@ -90,29 +102,6 @@ export class ModulosComponent {
       this.router.navigate(['/login']);
     }
 
-    this.chart = new Chart('canvas', {
-      type: 'polarArea',
-      data: this.chartData,
-      options: {
-        scales: {
-          r:{
-            max:10,
-          }
-        },
-        aspectRatio: 1.5,
-        plugins: {
-          legend: {
-            position: "bottom",
-            labels: {
-              font: {
-                family: 'Montserrat',
-                weight: 800,
-              }
-            }
-          }
-        },
-      },
-    });
 
   }
 
