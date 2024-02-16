@@ -39,8 +39,14 @@
       <p>{{usuario.nombre}} {{usuario.apellido1}} {{usuario.apellido2}}</p>
     </div>
     <div class="tablaModulos">
-      <p>Notas</p>
+      <div class="button-and-text">
+        <button class="bAtras" mat-icon-button reply="Example icon button with a menu icon" (click)="redirectToPage()">
+          <span class="material-icons"><mat-icon>reply</mat-icon></span>
+        </button>
+        <p>Notas</p>
+      </div>
       <div>
+        <div class="table-container">
         <table mat-table [dataSource]="dataSource" class="tablaNotas">
 
           <!-- Columna de Cabecera -->
@@ -62,12 +68,13 @@
           </ng-container>
 
           <!-- Filas de Datos -->
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let element; columns: displayedColumns;" (click)="onClickRa(element.header)"></tr>
 
         </table>
         <label id="tablaP">Presiona una fila de la tabla para acceder a los <b>recursos de aprendizaje</b> correspondientes.</label>
       </div>
+        </div>
     </div>
     <div class="graficoModulos">
       <div class="sobreTexto">

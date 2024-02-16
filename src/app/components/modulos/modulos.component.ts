@@ -117,5 +117,10 @@ export class ModulosComponent {
     //Eliminamos el token una vez hecho logout
     localStorage.removeItem('token');
   }
+
+  redirectToPage() {
+    // Aquí especifica la ruta a la que quieres redirigir
+    this.router.navigate(['/home']);
+  }
 }
 
