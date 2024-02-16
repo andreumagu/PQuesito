@@ -64,6 +64,10 @@ section {
   margin-bottom: 30px;
 }
 
+.bAtras {
+  color: black;
+}
+
 .nombreModulos {
   background: white;
 
@@ -84,8 +88,17 @@ section {
 .tablaModulos {
   background: white;
   border-radius: 25px;
+  top: 230px;
+  left: 100px;
 
-  height: 575px;
+  margin-top: 20px; /* Ajustar el margen superior según sea necesario */
+  z-index: 0;
+}
+
+.table-container {
+  max-height: 450px; /* Altura máxima de la tabla */
+  overflow-y: auto; /* Barra de desplazamiento vertical si es necesario */
+  z-index: 0;
 }
 
 .tablaNotas {
@@ -115,6 +128,16 @@ section {
   font-size: 25px;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.button-and-text {
+  display: flex;
+  align-items: center; /* Alinear verticalmente los elementos */
+  margin-left: 5px;
+}
+
+.button-and-text button {
+  margin-right: 190px; /* Ajustar el margen entre el botón y el texto */
 }
 
 #tablaP {
