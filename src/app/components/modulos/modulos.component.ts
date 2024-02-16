@@ -12,7 +12,8 @@ import { DatosService } from "../../services/datos.service";
 import { Router } from "@angular/router";
 import {Chart} from "chart.js/auto";
 import {MatTableModule} from '@angular/material/table';
-import {MatRippleModule} from '@angular/material/core';
+import {MatRippleModule} from "@angular/material/core";
+
 
 @Component({
   selector: 'app-modulos',
