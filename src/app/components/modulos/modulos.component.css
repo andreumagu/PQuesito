@@ -69,16 +69,25 @@ section {
 }
 
 .nombreModulos {
+  position: absolute;
   background: white;
 
-  padding: 30px 30px 30px 30px;
+  width: 580px;
+  height: 120px;
+
   border-radius: 25px;
+
+  top: 80px;
+  left: 100px;
 }
 
 .nombreModulos p {
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  padding-top: 45px;
 
   font-weight: 800;
   font-size: 22px;
@@ -86,8 +95,14 @@ section {
 }
 
 .tablaModulos {
+  position: absolute;
   background: white;
+
+  width: 580px;
+  height: 650px;
+
   border-radius: 25px;
+
   top: 230px;
   left: 100px;
 
@@ -141,19 +156,29 @@ section {
 }
 
 #tablaP {
+  position: absolute;
+  bottom: 0;
+  padding: 20px 70px 20px 70px;
+
   text-align: center;
   text-transform: uppercase;
 
   font-style: italic;
   font-size: 11px;
   font-weight: 450;
-
-  bottom: 0;
 }
 
 .graficoModulos {
+  position: absolute;
   background: white;
+
+  width: 1025px;
+  height: 800px;
+
   border-radius: 25px;
+
+  top: 80px;
+  left: 750px;
 }
 
 #canvas {
