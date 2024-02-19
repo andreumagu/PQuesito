@@ -9,7 +9,7 @@
         <h2>Iniciar Sesión</h2>
         <input type="text" name="usuario" placeholder="Usuario" [(ngModel)]="email">
         <input type="password" name="password" placeholder="Contraseña" [(ngModel)]="password">
-        <a href="#">Has olvidado tu Contraseña?</a>
+        <a href="" (click)="alert()">Has olvidado tu Contraseña?</a>
         <input class="bIniciarSesion" type="submit" value="Iniciar Sesión" (click)="onIniciarClick()">
       </form>
     </div>
