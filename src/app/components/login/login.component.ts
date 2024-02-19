@@ -27,18 +27,24 @@ export class LoginComponent {
   onIniciarClick() {
     this.service.getToken(this.email, this.password).subscribe(
       response => {
-        console.log(response);
-        // Almacenamos el token en una variable local
-        localStorage.setItem('token', response.token);
-
-        //Redireccionamos a la página de home
-        this.router.navigate(['/home']);
+        if (response.message == "Login failed"){
+          window.alert("Usuario o contraseña incorrectos.")
+        }else {
+          // Almacenamos el token en una variable local
+          localStorage.setItem('token', response.token);
+          //Redireccionamos a la página de home
+          this.router.navigate(['/home']);
+        }
       },
       error => {
         console.log(error);
       }
     );
 
+  }
+
+  alert(){
+    window.alert("Ponte en contacto con tu administrador para recuperar o cambiar la contraseña.")
   }
 
 
