@@ -64,30 +64,17 @@ section {
   margin-bottom: 30px;
 }
 
-.bAtras {
-  color: black;
-}
-
 .nombreModulos {
-  position: absolute;
   background: white;
 
-  width: 580px;
-  height: 120px;
-
+  padding: 30px 30px 30px 30px;
   border-radius: 25px;
-
-  top: 80px;
-  left: 100px;
 }
 
 .nombreModulos p {
-  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
-  padding-top: 45px;
 
   font-weight: 800;
   font-size: 22px;
@@ -95,18 +82,11 @@ section {
 }
 
 .tablaModulos {
-  position: absolute;
   background: white;
-
-  width: 580px;
-  height: 650px;
-
   border-radius: 25px;
 
-  top: 230px;
-  left: 100px;
-
-  margin-top: 20px; /* Ajustar el margen superior según sea necesario */
+  height: 575px;
+  margin-top: 20px;
   z-index: 0;
 }
 
@@ -114,6 +94,10 @@ section {
   max-height: 450px; /* Altura máxima de la tabla */
   overflow-y: auto; /* Barra de desplazamiento vertical si es necesario */
   z-index: 0;
+}
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 16px 0 16px;
 }
 
 .tablaNotas {
@@ -155,10 +139,14 @@ section {
   margin-right: 190px; /* Ajustar el margen entre el botón y el texto */
 }
 
-#tablaP {
-  position: absolute;
-  bottom: 0;
-  padding: 20px 70px 20px 70px;
+.button-and-text span {
+  margin: 0;
+  color: black;
+}
+
+.tablaLabel {
+  position: relative;
+  bottom: -10rem;
 
   text-align: center;
   text-transform: uppercase;
@@ -169,16 +157,8 @@ section {
 }
 
 .graficoModulos {
-  position: absolute;
   background: white;
-
-  width: 1025px;
-  height: 800px;
-
   border-radius: 25px;
-
-  top: 80px;
-  left: 750px;
 }
 
 #canvas {
@@ -190,6 +170,7 @@ section {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   font-weight: 800;
   font-size: 20px;
   letter-spacing: 1px;
