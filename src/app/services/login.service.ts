@@ -21,8 +21,6 @@ export class LoginService {
       "password": contra
     };
 
-
     return this.httpClient.post(this.url, body);
   }
-
 }

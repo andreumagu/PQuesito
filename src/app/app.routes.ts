@@ -9,8 +9,6 @@ import {RaComponent} from "./components/ra/ra.component";
 import {CeComponent} from "./components/ce/ce.component";
 
 
-
-
 export const routes: Routes = [
   {path:'', redirectTo:'/login', pathMatch:'full'},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },

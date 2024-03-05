@@ -76,11 +76,11 @@
 
                   <!-- Filas de Datos -->
                   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                  <tr mat-row *matRowDef="let element; columns: displayedColumns;" (click)="onClickRa(element.header)"></tr>
+                  <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
 
                 </table>
               </div>
-              <label id="tablaP">Presiona una fila de la tabla para acceder a los <b>recursos de aprendizaje</b> correspondientes.</label>
+              <label id="tablaP">Presiona una fila de la tabla para acceder a los <b>criterios de evaluación</b> correspondientes. <br>(disponible en versiones futuras)</label>
             </div>
           </div>
         </div>
