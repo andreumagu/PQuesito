@@ -45,8 +45,6 @@ export class RaComponent {
   dataSource: any[] = [];
   ngOnInit(){
 
-
-
     // Recuperar el el token
     const token = localStorage.getItem('token');
 
@@ -117,6 +115,10 @@ export class RaComponent {
       this.router.navigate(['/login']);
     }
 
+
+  }
+
+  onClickUnderline(){
 
   }
 
