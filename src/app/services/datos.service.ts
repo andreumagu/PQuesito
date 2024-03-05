@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {MY_CONSTANT} from "../constantUrl";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatosService {
 
-  private url = 'http://cicloweb.cesurformacion.com/API/php-excel/raexcel.php';
-  private url1 = 'http://cicloweb.cesurformacion.com/API/php-excel/mediasexcel.php';
-  private url3 = 'http://cicloweb.cesurformacion.com/API/php-excel/ceexcel.php';
+  // private url3 = 'http://cicloweb.cesurformacion.com/API/php-excel/ceexcel.php';
 
+  public serviceName = 'php-excel/raexcel.php';
+  public url = MY_CONSTANT + this.serviceName;
+
+  public serviceName1 = 'php-excel/mediasexcel.php';
+  public url1 = MY_CONSTANT + this.serviceName1;
 
 
   constructor(private httpClient: HttpClient) { }

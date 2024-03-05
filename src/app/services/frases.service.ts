@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {MY_CONSTANT} from "../constantUrl";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FrasesService {
 
-  private url = 'http://cicloweb.cesurformacion.com/API/frases.php';
+  public serviceName = 'frases.php';
+  public url = MY_CONSTANT + this.serviceName;
 
   constructor(private http: HttpClient) { }
 
